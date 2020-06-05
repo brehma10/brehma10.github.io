@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Project 2</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">Projects</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">Home</a></li>
+							<li class="active"><a href="project2.html">Project 2</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="#" class="icon brands fa-linkedin"><span class="label">Linkedin</span></a></li>
+							<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+									<h1>Project 2<br />
+                                        Regression Model </h1>
+									<p>In this project I was given a dataset with 16 variables that provided information for 40 movies and tasked with creating the best possible regression model that predicted the world revenue based off of the information provided.
+										To download the project report and raw code, click the botton below. </p>
+									<a href="project zip/Project2.zip" download class="button large">Download</a>
+								</header>
+			    				<p>The goal of this report is to create a regression model that can help predict the world revenue of a movie based on information available shortly after its release. We will be using a dataset with various information for 40 movies for this report.</p>
+								<p>Within the data set there are 16 variables, we can disregard the Title variable because it acts as like an id variable and it will not provide useful information. We can also disregard some of the redundant variables, like any variable that has to do with revenue, besides WorldRevenue, and we can also discount LOpening and Log.WorldRevenue which are log transformations of their respective variable. Not including these redundant variables can help us avoid multicollinearity since those variables are directly related to at least one other variable. Of the remaining 8 variables, 4 are quantitative, 3 are qualitative, and the last one is an indicator value which indicates whether or not the movie is a sequel. </p>
+								<p>	Regressing the data set by setting WorldRevenue as the dependent variable and every remaining variable as the dependent variable results in the following regression: </p>
+								<div class="image main"><img src="project 2/1.jpg" alt="" style="width:80%;height:80%;"></div>
+								<p>Looking at the R-squared value (.9233) we can conclude that this model is very good because it explains the 92.33% of the variance of WorldRevenue. </p>
+								<p>Even though this is a fairly accurate model, there are a number of assumptions that need to be met to ensure that this is a valid regression. Two of the assumptions being that the variance of the errors is equal, and the distribution of the errors is normal. We can test for the presence of equal variance by looking at the residual vs fitted plot. If the equal variance assumption is valid the points on the plot should be random and not follow any trend. The residual vs fitted plot is below.</p>
+                                <div class="image main"><img src="project 2/2.jpg" alt="" style="width:80%;height:80%;"></div>
+                                <p>We can see a there is a trend amongst the points where they taper outwards. This means that the model fails the equal variance assumption. To test the normality of the errors, we can look at a QQ plot. If normality occurs, then the points should be roughly linear.</p>
+                                <div class="image main"><img src="project 2/3.jpg" alt="" style="width:80%;height:80%;"></div>
+                                <p>It’s hard to tell if the model is normal because there are points that don’t follow the linear trend towards the ends so it necessary to further test for normality. We can use the Shapiro-Wilks test, which is a hypothesis test with the null hypothesis being the distribution is normal and the alternative hypothesis being it isn’t normal, so if there is a small p-value we would reject the null. After performing the Shapiro-Wilks test we get a value of 0.01271. From the Shapiro-Wilks test we can conclude that normality assumption is not met. To get around our model’s failure of the two assumptions, we can perform an Box-Cox transform on the dependent variable by finding the lambda value (.375) and using the following formula: (Y^(lm)-1)/lm where Y is our dependent variable and lm is our lambda value. After the transformation, we use the transformed dependent variable in a new model.</p>
+                                <div class="image main"><img src="project 2/4.jpg" alt="" style="width:80%;height:80%;"></div>
+                                <p>We can see that the transformation improved our R-squared value from .923 to .926 which means that the new model explains .3% more of the variance of WorldRevenue. To see if our transformation succeeded in meeting the assumptions, we look at the plots again. </p>
+                                <div class="image main"><img src="project 2/5.jpg" alt="" style="width:80%;height:80%;"></div>
+                                <div class="image main"><img src="project 2/6.jpg" alt="" style="width:80%;height:80%;"></div>
+                                <p>We can see the effect the transformation had on the residual vs fitted graph. After the transformation there is no trend amongst the points which means that the equal variance assumption is met. Now we have to test if the normality assumption is met.</p>
+                                <div class="image main"><img src="project 2/7.jpg" alt="" style="width:80%;height:80%;"></div>
+                                <div class="image main"><img src="project 2/8.jpg" alt="" style="width:80%;height:80%;"></div>
+                                <p>Looking at the QQ plot for the new model we can see the fitted line is close to having a slope of 1 which, along with the large p-value of the Shapiro-Wilks test (0.8845), means the normality assumption is met. Now that we have confirmed that these 2 assumptions have been met, we can test for the linearity assumption. To do this we plot each independent variable with the residuals. Ideally, we do not want to see any pattern. </p>
+                                <div class="image main"><img src="project 2/9.jpg" alt="" style="width:80%;height:80%;"></div>
+                                <p>We can see that the see that there is no pattern in any of the graphs so we can conclude that the linearity assumption is met. There is one more assumption to check for, independence of errors, but it does not apply here since this is not a time-series model. </p>
+								<p>Now that we have confirmed the validity of our model by checking each assumption, we can create the best possible model by removing unnecessary variables from our model. To do this we can run a backward elimination code that starts off with every variable in the model and removes variables one-by-one until the best possible model was made (had the lowest AIC). The variables Budget and Sequel were removed. The best possible model is as follows:</p>
+                                <div class="image main"><img src="project 2/10.jpg" alt="" style="width:80%;height:80%;"></div>
+                                <p>The best model for calculating the world revenue of a movie is based on the rating, genre, the production method, the number of theaters it played in, and the opening weekend revenue. The rating with the most negative impact on the world revenue is PG, this means that, according to our model having a rating of PG is bad for the world revenue. Our model suggests that romantic comedies are most profitable genre. A movie with a hybrid production method of live action and digital animation has a better impact on revenue. Both the number of theaters the movie’s revenue on the opening weekend both have positive impacts on world revenue. If we wanted to create a movie with the highest world revenue based on our model, it would be a G rated romantic comedy with hybrid production that opened in as many theaters as possible. </p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+								<p></p>
+								
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+				<footer id="footer">
+				</section>
+				<section class="split contact">
+					<section>
+						<h3>Email</h3>
+						<p><a href="mailto: bilalreh1997@gmail.com">bilalreh1997@gmail.com								</a></p>
+					</section>
+					<section>
+						<h3>Social</h3>
+						<ul class="icons alt">
+							<li><a href="#" class="icon brands alt fa-linkedin"><span class="label">Linkedin</span></a></li>
+							<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</section>
+				</section>
+			</footer>
+
+				<!-- Copyright -->
+					<div id="copyright">
+						Design: <a href="https://html5up.net">HTML5 UP</a></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
