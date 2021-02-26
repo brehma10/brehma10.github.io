@@ -42,13 +42,19 @@
 								<header class="major">
 									<h1>Project 1<br />
 									ARIMA Time Series </h1>
-									<p>In this project two time series models were created, one with a log trans and one without, to predict the daily closing prices of FedEx stock.
-										The goal was to test the effectivness of a model with a log transformation vs one without.<br />
-										To download the project report and raw code, click the button below.</p>
+									<h3>Summary</h3>
+									<p>This project was originally done for a time series class as a final project. In this project two time series models were created, one with a log trans and one without, to predict 
+										the daily closing prices of FedEx stock. The goal was to test the effectiveness the effectiveness of the two models to see which was superior. The closing prices from 2013 to 2018 
+										were imported directly into R from yahoo. After the 2 models were created, their respective AIC and BIC values were compared to determine which model was better. This project was 
+										coded in R and can be downloaded below. </p>
 									<a href="project zip/Project1.zip" download class="button large">Download</a>
+									<br /><br />
+									<h3>Project Report</h3>
 								</header>
-								<p>The goal of this report is to test the effectiveness of a log transformation on the closing price of FedEx stock. The daily closing prices for FedEx were acquired from Yahoo Finance and everything was coded in R.</p>
-								<p>The information included in the data set was the date, the opening price for that day, the absolute high and low prices, the closing and adj closing figure, and the volume of the entire price entries for that respective date. The date range used was January 1, 2013 to December 31, 2018 and the closing prices from the data was isolated.</p>
+								<p>The goal of this report is to test the effectiveness of a log transformation on the closing price of FedEx stock. The daily closing prices for 
+									FedEx were acquired from Yahoo Finance and everything was coded in R.</p>
+								<p>The information included in the data set was the date, the opening price for that day, the absolute high and low prices, the closing and adj closing figure, 
+									and the volume of the entire price entries for that respective date. The date range used was January 1, 2013 to December 31, 2018 and the closing prices from the data was isolated.</p>
 								<p>The analysis began by creating a model based off the untransformed closing prices from the dataset. The date vs closing price graph is as follows:</p>
 								<div class="image main"><img src="project 1/1.png" alt="" style="width:80%;height:80%;"></div>
 								<p>And the lag-1 closing price vs date graph is as follows:</p>
@@ -63,12 +69,16 @@
 								<div class="image main"><img src="project 1/5.png" alt="" style="width:80%;height:80%;"></div>
 								<p>From the graphs it can be concluded that the ideal model will be ARMA(7,17) because the 7th and 17th lags are significant. The model is as follows:</p>
 								<div class="image main"><img src="project 1/9.jpg" alt="" style="width:80%;height:80%;"></div>
-								<p>To see which of the 2 models is better, AIC and BIC values must be compared. The AIC and BIC values of the ARMA(7,17) model are -8554.66 and -8416.38 respectively and for the ARI(1,1) model the AIC and BIC values are 7026.189 and 7036.826 respectively. Since ARMA(7,17) model’s values are so much smaller, it can be concluded that model is better. We can also compare the ACF and PACF of the models’ residuals. The model with the least significant number of lags is the better model. ARMA(7,17)’s residual graph is as follows:</p>
+								<p>To see which of the 2 models is better, AIC and BIC values must be compared. The AIC and BIC values of the ARMA(7,17) model are -8554.66 and -8416.38 respectively and for the ARI(1,1) 
+									model the AIC and BIC values are 7026.189 and 7036.826 respectively. Since ARMA(7,17) model’s values are so much smaller, it can be concluded that model is better. We can also compare
+									 the ACF and PACF of the models’ residuals. The model with the least significant number of lags is the better model. ARMA(7,17)’s residual graph is as follows:</p>
 								<div class="image main"><img src="project 1/6.png" alt="" style="width:80%;height:80%;"></div>
 								<p>Only one lag from both the ACF and PACF are significant. ARI(1,1)’s residual graph is as follows:</p>
 								<div class="image main"><img src="project 1/7.png" alt="" style="width:80%;height:80%;"></div>
 								<p>There are 4 significant lags in both the ACF and PACF.</p>
-								<p>In conclusion, the ARMA(7,17) model from the log transformation with lag-1 is better than the ARI(1,1). This means, the log transformation was favorable to the untransformed model. Also, in the closing price vs date that there was an odd trend at the end of the data set. There was a dip in the closing prices that could have possibly compromised the accuracy of the models. If the goal was to create the most accurate model possible, that portion of the data would have to be removed because it does not seem to be part of the overall trend. </p>
+								<p>In conclusion, the ARMA(7,17) model from the log transformation with lag-1 is better than the ARI(1,1). This means, the log transformation was favorable to the untransformed model. Also,
+									 in the closing price vs date that there was an odd trend at the end of the data set. There was a dip in the closing prices that could have possibly compromised the accuracy of the models. 
+									 If the goal was to create the most accurate model possible, that portion of the data would have to be removed because it does not seem to be part of the overall trend. </p>
 							</section>
 
 					</div>
